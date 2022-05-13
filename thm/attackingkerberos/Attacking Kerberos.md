@@ -1,8 +1,10 @@
 # Attacking Kerberos
 
-> Raymond Nazaryan | February 16, 2022
+> Raymond Nazaryan | May 11, 2022
 
+First export the IP address of the machine:
 ```bash
-export IP=
+export IP=<IP-address>
 ```
+
 
