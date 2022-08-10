@@ -243,3 +243,91 @@ sudo go install github.com/tomnomnom/assetfinder@latest
 ```bash
 assetfinder tesla.com | grep tesla.com | sort -u 
 ```
+
+---
+### Phone Number OSINT
+
+Help command:
+```
+phoneinfoga --help
+```
+
+Google dorking is also available:
+```
+phoneinfoga scan -n 14082492815
+```
+
+Spinning up webserver: 
+```
+phoneinfoga server -p 8080
+```
+Running on:
+http://localhost:8080
+
+---
+### Social Media OSINT
+
+For Twitter:
+```
+twint -u username
+```
+
+---
+### OSINT Frameworks
+### Recon-ng
+Similar interface to metasploit:
+```
+recon-ng
+```
+
+```
+marketplace search
+```
+
+Some require API key.
+
+Installing `hackertarget`:
+```
+marketplace install hackertarget
+```
+
+Loading the module:
+```
+modules load hackertarget
+```
+
+Finding out more info about `hackertarget`:
+```
+info
+```
+
+Set the `SOURCE`:
+```
+options set SOURCE tcm-sec.com
+```
+
+Running:
+```
+run
+```
+
+Installing `profiler`:
+```
+marketplace install profiler
+```
+
+Loading the module:
+```
+modules load profiler
+```
+
+Finding out more info about `profiler`
+```
+info
+```
+
+### Maltego
+https://www.maltego.com
+
+### Hunchly
+Google Chrome extension
