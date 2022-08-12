@@ -77,10 +77,10 @@ Make sure you have a registered user and paste it into this into the URL: `index
 Notice that we have LFI:
 ![[LFI successful.png]]
 
-`johnpaul` is a user that has `/bin/bash` access:
+`jeanpaul` is a user that has `/bin/bash` access:
 ![[jeanpaul has bash access.png]]
 
-Let's use `johnpaul` to `ssh` into the server. We will try to use the password that we got from the `config.yml` file.
+Let's use `jeanpaul` to `ssh` into the server. We will try to use the password that we got from the `config.yml` file.
 ![[ssh as jeanpaul.png]]
 
 It works!
